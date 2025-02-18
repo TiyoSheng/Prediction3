@@ -33,24 +33,19 @@ export default {
   watch: {
     async web3() {
       let self = this;
-      let signer = self.web3.getSigner();
-    },
-  },
-  async mounted() {
-    let self = this;
-    if (window.ethereum) {
       window.ethereum.on("chainChanged", (chainId) => {
         console.log("changeNetwork,chainId:", chainId);
         self.connect_wallet();
       });
-      window.ethereum.on("accountsChanged", async (chainId) => {
-        let user = this.web3.getSigner();
-        let wallet_address = await user.getAddress();
+      window.ethereum.on("accountsChanged", async (wallet_address) => {
         console.log("changeWallet:", wallet_address);
-        self.$store.commit("setAddress", { address: wallet_address });
+        self.$store.commit("setAddress", { address: wallet_address[0] });
         self.update_balance();
       });
-    }
+    },
+  },
+  async mounted() {
+    let self = this;
   },
   methods: {
     async initFactory() {
@@ -81,6 +76,7 @@ export default {
 
 a {
   color: unset;
+
   &:hover,
   &:link,
   &:hover,

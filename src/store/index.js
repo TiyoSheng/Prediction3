@@ -23,6 +23,7 @@ const store = new Vuex.Store({
       state.web3 = payload.web3;
     },
     setAddress(state, payload) {
+      console.log('setAddress',payload)
       // 变更状态
       state.wallet_address = payload.address;
     },
