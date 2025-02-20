@@ -148,7 +148,6 @@
           Submit Your Predict
         </a-button>
         <a-button
-          key="submit"
           type="primary"
           :loading="loading.modal_loading"
           @click="approve"
